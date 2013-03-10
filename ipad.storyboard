@@ -72,15 +72,18 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Qt4-nv-ATA"/>
                                 </items>
                             </toolbar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wVM-Ne-S6L"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VTc-Eg-ALX" firstAttribute="top" secondItem="os7-Kx-X5V" secondAttribute="bottom" type="default" id="9ge-p2-wyc"/>
+                            <constraint firstItem="wVM-Ne-S6L" firstAttribute="leading" secondItem="Tqi-gF-J1M" secondAttribute="leading" constant="365" id="AxA-Kh-fnk"/>
                             <constraint firstItem="os7-Kx-X5V" firstAttribute="trailing" secondItem="Tqi-gF-J1M" secondAttribute="trailing" type="default" id="JEd-TG-sK3"/>
                             <constraint firstItem="os7-Kx-X5V" firstAttribute="leading" secondItem="Tqi-gF-J1M" secondAttribute="leading" type="default" id="V9n-Ye-tpv"/>
                             <constraint firstItem="VTc-Eg-ALX" firstAttribute="trailing" secondItem="Tqi-gF-J1M" secondAttribute="trailing" type="default" id="WVH-MA-3yq"/>
                             <constraint firstItem="os7-Kx-X5V" firstAttribute="top" secondItem="Tqi-gF-J1M" secondAttribute="top" type="default" id="ePj-4p-XYP"/>
                             <constraint firstItem="VTc-Eg-ALX" firstAttribute="leading" secondItem="Tqi-gF-J1M" secondAttribute="leading" type="default" id="lrj-H7-PD4"/>
+                            <constraint firstItem="wVM-Ne-S6L" firstAttribute="centerY" secondItem="Tqi-gF-J1M" secondAttribute="centerY" type="default" id="rUl-cc-uhb"/>
                             <constraint firstItem="VTc-Eg-ALX" firstAttribute="bottom" secondItem="Tqi-gF-J1M" secondAttribute="bottom" type="default" id="v5Z-kx-qz5"/>
                         </constraints>
                     </view>
@@ -88,6 +91,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <connections>
                         <outlet property="scrollView" destination="VTc-Eg-ALX" id="zPJ-DK-Ujr"/>
+                        <outlet property="spinner" destination="wVM-Ne-S6L" id="B1C-AZ-4l2"/>
                         <outlet property="titleBarButtonItem" destination="sOh-DH-7DD" id="gRw-Fr-Wzt"/>
                     </connections>
                 </viewController>
@@ -138,6 +142,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="zs7-8h-4d0"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="tfJ-v0-iQv">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXl-ow-NSI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -177,6 +184,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="titleBarButtonItem" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
@@ -185,6 +193,9 @@
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UIRefreshControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
