@@ -27,7 +27,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.photos = [FlickrFetcher latestGeoreferencedPhotos];
+    [self loadLatestPhotosFromFlickr];
+    [self.refreshControl addTarget:self action:@selector(loadLatestPhotosFromFlickr) forControlEvents:UIControlEventValueChanged];
+}
+
+-(void)loadLatestPhotosFromFlickr
+{
+    [self.refreshControl beginRefreshing];
+    
+    dispatch_queue_t loaderQ = dispatch_queue_create("flickr latest loader", NULL);
+    dispatch_async(loaderQ, ^{
+    NSArray *photos = [FlickrFetcher latestGeoreferencedPhotos];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.photos = photos;
+            [self.refreshControl endRefreshing];
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning

@@ -12,12 +12,15 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="XeX-76-azU"/>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFY-nH-i4C"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BFY-nH-i4C" firstAttribute="top" secondItem="L33-QA-zc0" secondAttribute="top" type="default" id="F0z-j7-ZLa"/>
                             <constraint firstItem="BFY-nH-i4C" firstAttribute="bottom" secondItem="L33-QA-zc0" secondAttribute="bottom" type="default" id="H5j-0n-Iim"/>
+                            <constraint firstItem="XeX-76-azU" firstAttribute="leading" secondItem="L33-QA-zc0" secondAttribute="leading" constant="141" id="RPD-IQ-xP8"/>
+                            <constraint firstItem="XeX-76-azU" firstAttribute="centerY" secondItem="BFY-nH-i4C" secondAttribute="centerY" type="user" id="VZm-ae-7Z2"/>
                             <constraint firstItem="BFY-nH-i4C" firstAttribute="trailing" secondItem="L33-QA-zc0" secondAttribute="trailing" type="default" id="oOv-eQ-avK"/>
                             <constraint firstItem="BFY-nH-i4C" firstAttribute="leading" secondItem="L33-QA-zc0" secondAttribute="leading" type="default" id="t24-JC-LSj"/>
                         </constraints>
@@ -25,11 +28,12 @@
                     <navigationItem key="navigationItem" id="as9-F9-AIm"/>
                     <connections>
                         <outlet property="scrollView" destination="BFY-nH-i4C" id="ElU-kT-ZjX"/>
+                        <outlet property="spinner" destination="XeX-76-azU" id="2bK-aB-lRx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dNc-9z-jnz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780" y="1"/>
+            <point key="canvasLocation" x="336" y="-13"/>
         </scene>
         <!--Latest Flickr PhotosTVC-->
         <scene sceneID="d8e-hJ-cEL">
@@ -71,10 +75,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Dij-tz-fq8"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="4zV-sh-RLi">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOi-PL-m29" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="1"/>
+            <point key="canvasLocation" x="-56" y="-13"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="deD-0R-99z">
@@ -92,7 +99,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GOH-Ii-kK5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-138" y="1"/>
+            <point key="canvasLocation" x="-582" y="-13"/>
         </scene>
     </scenes>
     <classes>
@@ -103,6 +110,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="titleBarButtonItem" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="LatestFlickrPhotosTVC" superclassName="FlickrPhotoTVC">
@@ -110,6 +119,9 @@
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UIRefreshControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
