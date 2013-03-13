@@ -15,11 +15,24 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *titleBarButtonItem;
 @property(nonatomic,strong) UIPopoverController *urlPopOver;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *splitViewBarButtonItem;
 
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
 
 @implementation ImageViewController
+
+-(void)setsplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    if(_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
+    
+    if(splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
+    self.toolbar.items = toolbarItems;
+    _splitViewBarButtonItem = splitViewBarButtonItem;
+    
+}
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
@@ -46,7 +59,7 @@
             
         }
     }
-}
+   }
 
 -(void)setTitle:(NSString *)title
 {
@@ -112,7 +125,7 @@
     self.scrollView.delegate    = self;
     [self resetImage];
     self.titleBarButtonItem.title = self.title;
-    
+    [self setsplitViewBarButtonItem:self.splitViewBarButtonItem];
 	// Do any additional setup after loading the view.
 }
 

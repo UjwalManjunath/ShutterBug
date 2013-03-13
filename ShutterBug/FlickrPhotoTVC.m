@@ -30,8 +30,55 @@
 
 -(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
 {
-    return NO;
+    return UIInterfaceOrientationIsPortrait(orientation);
 }
+
+-(void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
+{
+    barButtonItem.title = @"Featured";
+    id detailViewController = [self.splitViewController.viewControllers lastObject];
+    
+    if([detailViewController respondsToSelector:@selector(setsplitViewBarButtonItem:)])
+    {
+        [detailViewController performSelector:@selector(setsplitViewBarButtonItem:) withObject:barButtonItem];
+    }
+}
+
+-(void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    id detailViewController = [self.splitViewController.viewControllers lastObject];
+    if([detailViewController respondsToSelector:@selector(setsplitViewBarButtonItem:)])
+    {
+        [detailViewController performSelector:@selector(setsplitViewBarButtonItem:) withObject:Nil];
+    }
+}
+
+-(id)splitViewDetailWithBarButtonItem
+{
+    id detail = [self.splitViewController.viewControllers lastObject];
+    if(![detail respondsToSelector:@selector(setsplitViewBarButtonItem:)] ||
+       ![detail respondsToSelector:@selector(splitViewBarButtonItem)])
+        detail= nil;
+    return detail;
+}
+
+
+- (void)transferSplitViewBarButtonItemToViewController:(id)destinationViewController
+{
+    UIBarButtonItem *splitViewBarButtonItem = [[self splitViewDetailWithBarButtonItem] performSelector:@selector(splitViewBarButtonItem)];
+    [[self splitViewDetailWithBarButtonItem] performSelector:@selector(setsplitViewBarButtonItem:) withObject:nil];
+    if (splitViewBarButtonItem)
+        [destinationViewController performSelector:@selector(setsplitViewBarButtonItem:) withObject:splitViewBarButtonItem];
+}
+
+
+
+
+
+
+
+
+
 
 #pragma mark - Table view data source
 
@@ -75,11 +122,14 @@
             {
                 if([segue.destinationViewController respondsToSelector:@selector(setImageURL:)])
                 {
+                    [self transferSplitViewBarButtonItemToViewController:segue.destinationViewController];
                     NSURL *url = [FlickrFetcher urlForPhoto:self.photos[indexPath.row] format:FlickrPhotoFormatLarge];
                     [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:url];
                     [segue.destinationViewController setTitle:[self titleForRow:indexPath.row]];
                 }
             }
+            
+            
         }
     }
 }
